@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>850</width><height>500</height></rect></property>
+  <property name="windowTitle"><string>Автовозврат (RTL)</string></property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
+    <item>
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="minimumSize"><size><width>400</width><height>300</height></size></property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="controlsLayout">
+      <item><widget class="QPushButton" name="btnStart"><property name="text"><string>Старт миссии</string></property></widget></item>
+      <item><widget class="QPushButton" name="btnLostLink"><property name="enabled"><bool>false</bool></property><property name="text"><string>Обрыв связи</string></property></widget></item>
+      <item><widget class="QPushButton" name="btnReset"><property name="text"><string>Сброс</string></property></widget></item>
+      <item><spacer name="statusSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>16</height></size></property></spacer></item>
+      <item><widget class="QLabel" name="labelStatus"><property name="text"><string>Статус: ОЖИДАНИЕ</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+      <item><widget class="QLabel" name="labelLink"><property name="text"><string>Связь: Есть</string></property></widget></item>
+      <item><spacer name="logSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>16</height></size></property></spacer></item>
+      <item><widget class="QTextEdit" name="textLog"><property name="readOnly"><bool>true</bool></property><property name="placeholderText"><string>Лог событий</string></property></widget></item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops><tabstop>graphicsView</tabstop><tabstop>btnStart</tabstop><tabstop>btnLostLink</tabstop><tabstop>btnReset</tabstop><tabstop>textLog</tabstop></tabstops>
+ <resources/>
+ <connections/>
+</ui>

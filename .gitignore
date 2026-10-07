@@ -1,0 +1,23 @@
+# Build output
+build/
+build-*/
+cmake-build-*/
+
+# Local Qt Creator settings
+.qtcreator/
+*.user
+*.user.*
+
+# Generated files
+.qmake.stash
+Makefile*
+ui_*.h
+moc_*.cpp
+*.o
+*.obj
+*.exe
+*.dll
+
+# OS files
+Thumbs.db
+.DS_Store
