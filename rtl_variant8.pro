@@ -1,4 +1,4 @@
-QT += core gui widgets
+QT += core gui widgets multimedia
 
 CONFIG += c++17
 TEMPLATE = app
@@ -9,3 +9,5 @@ SOURCES += main.cpp \
 
 HEADERS += mainwindow.h
 FORMS += mainwindow.ui
+
+RESOURCES += resources.qrc

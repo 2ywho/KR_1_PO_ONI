@@ -9,9 +9,15 @@
 #include <QTimer>
 #include <cmath>
 #include <iostream>
+#include <QSlider>
+#include <QCheckBox>
+#include <QFile>
+#include <QGraphicsPathItem>
 int main(int argc, char **argv) {
     QApplication app(argc, argv);
     MainWindow window;
+    window.findChild<QCheckBox*>("checkSound")->setChecked(false);
+    if (!QFile::exists(":/sounds/lost.wav") || !QFile::exists(":/sounds/landed.wav")) return 30;
     auto view=window.findChild<QGraphicsView*>("graphicsView");
     auto start=window.findChild<QPushButton*>("btnStart");
     auto reset=window.findChild<QPushButton*>("btnReset");
@@ -94,6 +100,37 @@ int main(int argc, char **argv) {
     lost->click();
     reset->click();
     if (timer->isActive() || rtlLine->isVisible() || uav->pos()!=QPointF(300,200)) return 18;
+    reset->click();
+    auto speed=window.findChild<QSlider*>("sliderSpeed");
+    auto pause=window.findChild<QPushButton*>("btnPause");
+    start->click();
+    speed->setValue(160);
+    const auto initial=uav->pos();
+    QMetaObject::invokeMethod(&window,"tick",Qt::DirectConnection);
+    const auto motion=uav->pos()-initial;
+    if (std::abs(std::hypot(motion.x(),motion.y())-8.0)>0.000001) return 31;
+    pause->click();
+    const auto held=uav->pos();
+    QMetaObject::invokeMethod(&window,"tick",Qt::DirectConnection);
+    if (timer->isActive() || uav->pos()!=held) return 32;
+    lost->click();
+    if (timer->isActive()) return 33;
+    pause->click();
+    for(int i=0;i<250 && timer->isActive();++i) QMetaObject::invokeMethod(&window,"tick",Qt::DirectConnection);
+    if(timer->isActive() || std::abs(uav->scale()-0.5)>0.000001) return 34;
+    reset->click();
+    if(uav->scale()!=1.0 || speed->value()!=80 || pause->isEnabled()) return 35;
+    start->click(); lost->click();
+    QMetaObject::invokeMethod(&window,"tick",Qt::DirectConnection);
+    QMetaObject::invokeMethod(&window,"tick",Qt::DirectConnection);
+    pause->click();
+    const double heldScale=uav->scale();
+    QMetaObject::invokeMethod(&window,"tick",Qt::DirectConnection);
+    if(uav->scale()!=heldScale || timer->isActive()) return 36;
+    reset->click();
+    auto chart=window.findChild<QGraphicsView*>("graphicsViewChart");
+    if(!chart || !chart->scene() || !window.findChild<QLabel*>("labelDistance")->text().contains("0.0")) return 37;
+    std::cout << "PASS: extras (speed, pause, RTL while paused, landing animation, resources, telemetry); ";
     std::cout << "PASS: RTL, landing, reset during RTL; ";
     std::cout << "PASS: base departure, four waypoints, route loop, bounded step, reset, restart\n";
 }

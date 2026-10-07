@@ -7,15 +7,16 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 
 qt_add_executable(rtl_variant8
     main.cpp
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    resources.qrc
 )
-target_link_libraries(rtl_variant8 PRIVATE Qt6::Widgets)
+target_link_libraries(rtl_variant8 PRIVATE Qt6::Widgets Qt6::Multimedia)
 set_target_properties(rtl_variant8 PROPERTIES WIN32_EXECUTABLE TRUE)
 
 option(BUILD_TESTING "Build simulation checks" OFF)
@@ -26,8 +27,9 @@ if(BUILD_TESTING)
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        resources.qrc
     )
     target_include_directories(check_route PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-    target_link_libraries(check_route PRIVATE Qt6::Widgets)
+    target_link_libraries(check_route PRIVATE Qt6::Widgets Qt6::Multimedia)
     add_test(NAME route_and_rtl COMMAND check_route -platform offscreen)
 endif()

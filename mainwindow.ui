@@ -2,21 +2,27 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="geometry"><rect><x>0</x><y>0</y><width>850</width><height>500</height></rect></property>
+  <property name="geometry"><rect><x>0</x><y>0</y><width>1000</width><height>720</height></rect></property>
   <property name="windowTitle"><string>Автовозврат (RTL)</string></property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
-    <item>
+    <item><layout class="QVBoxLayout" name="visualLayout"><item>
      <widget class="QGraphicsView" name="graphicsView">
       <property name="minimumSize"><size><width>400</width><height>300</height></size></property>
      </widget>
-    </item>
+    </item><item><widget class="QGraphicsView" name="graphicsViewChart"><property name="minimumSize"><size><width>400</width><height>180</height></size></property><property name="maximumSize"><size><width>16777215</width><height>200</height></size></property></widget></item></layout></item>
     <item>
      <layout class="QVBoxLayout" name="controlsLayout">
       <item><widget class="QPushButton" name="btnStart"><property name="text"><string>Старт миссии</string></property></widget></item>
       <item><widget class="QPushButton" name="btnLostLink"><property name="enabled"><bool>false</bool></property><property name="text"><string>Обрыв связи</string></property></widget></item>
       <item><widget class="QPushButton" name="btnReset"><property name="text"><string>Сброс</string></property></widget></item>
-      <item><spacer name="statusSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>16</height></size></property></spacer></item>
+      <item><widget class="QPushButton" name="btnPause"><property name="text"><string>Пауза</string></property></widget></item>
+<item><widget class="QCheckBox" name="checkSound"><property name="text"><string>Звук</string></property><property name="checked"><bool>true</bool></property></widget></item>
+<item><widget class="QLabel" name="labelSpeed"><property name="text"><string>Скорость: 80 ед./с</string></property></widget></item>
+<item><widget class="QSlider" name="sliderSpeed"><property name="minimum"><number>20</number></property><property name="maximum"><number>160</number></property><property name="value"><number>80</number></property><property name="orientation"><enum>Qt::Horizontal</enum></property></widget></item>
+<item><widget class="QLabel" name="labelDistance"><property name="text"><string>До базы: 0 ед.</string></property></widget></item>
+<item><widget class="QLabel" name="labelTime"><property name="text"><string>Время симуляции: 0 с</string></property></widget></item>
+<item><spacer name="statusSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>16</height></size></property></spacer></item>
       <item><widget class="QLabel" name="labelStatus"><property name="text"><string>Статус: ОЖИДАНИЕ</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
       <item><widget class="QLabel" name="labelLink"><property name="text"><string>Связь: Есть</string></property></widget></item>
       <item><spacer name="logSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>16</height></size></property></spacer></item>
